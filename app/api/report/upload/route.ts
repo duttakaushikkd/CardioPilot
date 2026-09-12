@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/db";
 import { LipidReport } from "@/lib/models/LipidReport";
 import { extractLipidReport } from "@/lib/openai";
+import { parseReportDate } from "@/lib/date";
 
 export async function POST(request: Request) {
   try {
@@ -12,8 +13,9 @@ export async function POST(request: Request) {
     const buffer = Buffer.from(await file.arrayBuffer());
     const fileDataUrl = `data:${file.type};base64,${buffer.toString("base64")}`;
     const extraction = await extractLipidReport(fileDataUrl, file.name, file.type);
+    const reportDate = parseReportDate(extraction.reportDate);
     await connectDB();
-    const report = await LipidReport.create({ ...extraction, userId, sourceFileName: file.name });
+    const report = await LipidReport.create({ ...extraction, reportDate, userId, sourceFileName: file.name });
     return NextResponse.json({ report });
   } catch (error) {
     return NextResponse.json({ error: error instanceof Error ? error.message : "Report upload failed" }, { status: 500 });

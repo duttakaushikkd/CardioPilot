@@ -41,7 +41,7 @@ export async function extractLipidReport(fileDataUrl: string, fileName: string, 
     input: [
       {
         role: "system",
-        content: "Extract lipid profile values from the uploaded report. Use mg/dL values when present. Return only strict JSON. If a value is missing, infer only when a formula is explicit."
+        content: "Extract lipid profile values from the uploaded report. Use mg/dL values when present. Return only strict JSON. Return reportDate in ISO YYYY-MM-DD format. If a value is missing, infer only when a formula is explicit."
       },
       {
         role: "user",
