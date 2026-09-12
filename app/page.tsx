@@ -9,7 +9,7 @@ export default function LandingPage() {
       <section className="grid min-h-[72vh] items-center gap-8 py-10 lg:grid-cols-[1.1fr_0.9fr]">
         <div className="space-y-6">
           <div className="inline-flex rounded-md bg-muted px-3 py-1 text-sm text-muted-foreground">AI cholesterol coach</div>
-          <h1 className="max-w-3xl text-4xl font-semibold tracking-normal sm:text-6xl">LipiTrack AI</h1>
+          <h1 className="max-w-3xl text-4xl font-semibold tracking-normal sm:text-6xl">Cardio Pilot</h1>
           <p className="max-w-2xl text-lg text-muted-foreground">
             Upload lipid reports, review meal-photo analysis, correct AI guesses, and watch LDL-friendly habits take shape over time.
           </p>

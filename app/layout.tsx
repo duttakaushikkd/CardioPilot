@@ -3,7 +3,7 @@ import "./globals.css";
 import { Shell } from "@/components/shell";
 
 export const metadata: Metadata = {
-  title: "LipiTrack AI",
+  title: "Cardio Pilot",
   description: "Personal cholesterol tracking agent for lipid reports and meal analysis."
 };
 

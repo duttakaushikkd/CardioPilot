@@ -25,7 +25,7 @@ export default function CoachPage() {
       .catch((err) => setError(err.error || "Coach data unavailable."));
   }, []);
 
-  if (error) return <Card><CardHeader><CardTitle>LipiTrack AI needs data</CardTitle></CardHeader><CardContent className="text-muted-foreground">{error}</CardContent></Card>;
+  if (error) return <Card><CardHeader><CardTitle>Cardio Pilot needs data</CardTitle></CardHeader><CardContent className="text-muted-foreground">{error}</CardContent></Card>;
   if (!coach) return <div className="h-40 animate-pulse rounded-lg bg-muted" />;
 
   return (
@@ -33,7 +33,7 @@ export default function CoachPage() {
       <div className="flex items-center gap-3">
         <span className="grid h-12 w-12 place-items-center rounded-md bg-primary text-primary-foreground"><Bot className="h-6 w-6" /></span>
         <div>
-          <h1 className="text-3xl font-semibold">LipiTrack AI</h1>
+          <h1 className="text-3xl font-semibold">Cardio Pilot</h1>
           <p className="mt-1 text-muted-foreground">Coach output is generated from stored reports, meals, daily totals, and corrections.</p>
         </div>
       </div>

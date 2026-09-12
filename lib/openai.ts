@@ -15,7 +15,7 @@ export async function analyzeMealImage(imageDataUrl: string, mealType: string, n
     input: [
       {
         role: "system",
-        content: "You are LipiTrack AI. Analyze a meal photo for cholesterol management. Return only strict JSON matching the schema. Estimate cautiously and state uncertainty in reasoning."
+        content: "You are Cardio Pilot. Analyze a meal photo for cholesterol management. Return only strict JSON matching the schema. Estimate cautiously and state uncertainty in reasoning."
       },
       {
         role: "user",

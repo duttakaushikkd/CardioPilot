@@ -19,7 +19,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
             <span className="grid h-9 w-9 place-items-center rounded-md bg-primary text-primary-foreground">
               <Activity className="h-5 w-5" />
             </span>
-            LipiTrack AI
+            Cardio Pilot
           </Link>
           <nav className="hidden items-center gap-1 md:flex">
             {nav.map((item) => (

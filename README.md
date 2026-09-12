@@ -1,4 +1,4 @@
-# LipiTrack AI
+# Cardio Pilot
 
 Production-ready Next.js cholesterol tracking agent for lipid reports and reviewed meal-photo nutrition logs.
 
