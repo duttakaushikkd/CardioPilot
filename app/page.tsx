@@ -1,0 +1,48 @@
+import Link from "next/link";
+import { ArrowRight, Bot, Camera, FileHeart, LineChart } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
+export default function LandingPage() {
+  return (
+    <div className="grid gap-8 pb-20">
+      <section className="grid min-h-[72vh] items-center gap-8 py-10 lg:grid-cols-[1.1fr_0.9fr]">
+        <div className="space-y-6">
+          <div className="inline-flex rounded-md bg-muted px-3 py-1 text-sm text-muted-foreground">AI cholesterol coach</div>
+          <h1 className="max-w-3xl text-4xl font-semibold tracking-normal sm:text-6xl">LipiTrack AI</h1>
+          <p className="max-w-2xl text-lg text-muted-foreground">
+            Upload lipid reports, review meal-photo analysis, correct AI guesses, and watch LDL-friendly habits take shape over time.
+          </p>
+          <div className="flex flex-wrap gap-3">
+            <Button asChild>
+              <Link href="/dashboard">
+                Open Dashboard <ArrowRight className="h-4 w-4" />
+              </Link>
+            </Button>
+            <Button asChild variant="outline">
+              <Link href="/meal">Add Meal</Link>
+            </Button>
+          </div>
+        </div>
+        <div className="grid gap-3">
+          {[
+            { icon: FileHeart, title: "Extract lipid values", body: "LDL, HDL, triglycerides, VLDL, and non-HDL stored as history." },
+            { icon: Camera, title: "Analyze food photos", body: "Structured nutrition estimates with cholesterol risk and reasoning." },
+            { icon: LineChart, title: "Track what matters", body: "Calories, saturated fat, fiber, health score, and report trends." },
+            { icon: Bot, title: "Coach from your data", body: "Insights are calculated from stored reports, meals, and corrections." }
+          ].map((item) => (
+            <Card key={item.title}>
+              <CardHeader className="flex-row items-center gap-3">
+                <span className="grid h-10 w-10 place-items-center rounded-md bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-100">
+                  <item.icon className="h-5 w-5" />
+                </span>
+                <CardTitle>{item.title}</CardTitle>
+              </CardHeader>
+              <CardContent className="text-sm text-muted-foreground">{item.body}</CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
+    </div>
+  );
+}
