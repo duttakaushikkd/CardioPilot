@@ -17,12 +17,10 @@ export default function UploadReportPage() {
     setLoading(true);
     setMessage("");
     const form = new FormData(event.currentTarget);
-    const saved = window.localStorage.getItem("trackItUser");
-    if (saved) form.set("userId", JSON.parse(saved).id);
     const res = await fetch("/api/report/upload", { method: "POST", body: form });
     const body = await res.json();
     setLoading(false);
-    if (!res.ok) return setMessage(body.error || "Upload failed");
+    if (!res.ok) return setMessage(body.error || "Please login before uploading a report.");
     setResult(body.report);
   }
 
@@ -30,7 +28,7 @@ export default function UploadReportPage() {
     <div className="grid max-w-3xl gap-6 pb-20">
       <div>
         <h1 className="text-3xl font-semibold">Upload Lipid Report</h1>
-        <p className="mt-2 text-muted-foreground">Images are extracted by OpenAI Vision and stored as lipid history.</p>
+        <p className="mt-2 text-muted-foreground">Images are extracted by OpenAI Vision and stored permanently as lipid history for your dashboard graph.</p>
       </div>
       <Card>
         <CardHeader><CardTitle>Report file</CardTitle></CardHeader>

@@ -11,7 +11,7 @@ export async function POST(request: Request) {
     const buffer = Buffer.from(await file.arrayBuffer());
     const imageDataUrl = `data:${file.type};base64,${buffer.toString("base64")}`;
     const analysis = await analyzeMealImage(imageDataUrl, mealType, notes);
-    return NextResponse.json({ analysis, imageUrl: imageDataUrl });
+    return NextResponse.json({ analysis });
   } catch (error) {
     return NextResponse.json({ error: error instanceof Error ? error.message : "Meal analysis failed" }, { status: 500 });
   }

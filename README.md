@@ -24,10 +24,15 @@ Set `OPENAI_API_KEY` and `MONGODB_URI` in `.env.local` or Vercel.
 
 - `POST /api/report/upload`
 - `POST /api/auth/login`
+- `POST /api/auth/signup`
+- `POST /api/auth/logout`
 - `POST /api/meal/analyze`
-- `POST /api/meal/save`
 - `GET /api/dashboard`
 
 ## Notes
 
-The streamlined app has login, cholesterol report upload, a food-photo nutrition scanner, and a dashboard that plainly shows whether LDL is reducing.
+The food-photo scanner analyzes photos on the fly through the LLM and does not store food photos or nutrition results in MongoDB. Cholesterol tracking stores extracted lipid report data in `lipid_reports` and a persistent dashboard graph snapshot in `cholesterol_trends`. The graph snapshot is rebuilt from every stored report if it ever falls out of sync.
+
+Cholesterol report and dashboard APIs use a signed HTTP-only session cookie. They do not trust a `userId` sent from the browser.
+
+Signup requires acceptance of Terms and Conditions. The user record stores consent status, consent timestamp, terms version, IP, and user agent.

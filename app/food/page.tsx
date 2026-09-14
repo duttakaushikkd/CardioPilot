@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Camera, Save } from "lucide-react";
+import { Camera } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -27,9 +27,7 @@ const nutrientLabels: Array<[keyof MealAnalysis, string, string]> = [
 
 export default function FoodPage() {
   const [analysis, setAnalysis] = useState<MealAnalysis | null>(null);
-  const [imageUrl, setImageUrl] = useState("");
   const [loading, setLoading] = useState(false);
-  const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState("");
 
   async function analyze(event: React.FormEvent<HTMLFormElement>) {
@@ -44,30 +42,6 @@ export default function FoodPage() {
     setLoading(false);
     if (!res.ok) return setMessage(body.error || "Food analysis failed");
     setAnalysis(body.analysis);
-    setImageUrl(body.imageUrl);
-  }
-
-  async function save() {
-    if (!analysis) return;
-    setSaving(true);
-    setMessage("");
-    const saved = window.localStorage.getItem("trackItUser");
-    const userId = saved ? JSON.parse(saved).id : "demo-user";
-    const res = await fetch("/api/meal/save", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        userId,
-        date: new Date().toISOString(),
-        mealType: "Food Scan",
-        imageUrl,
-        aiPrediction: analysis,
-        userCorrected: analysis,
-        correctionMade: false
-      })
-    });
-    setSaving(false);
-    setMessage(res.ok ? "Saved to your cholesterol tracker." : "Could not save this scan. Check MongoDB settings.");
   }
 
   return (
@@ -75,7 +49,7 @@ export default function FoodPage() {
       <div className="grid content-start gap-6">
         <div>
           <h1 className="text-3xl font-semibold">Food Scan</h1>
-          <p className="mt-2 text-muted-foreground">Upload a food photo to see estimated nutrition, minerals, and cholesterol impact.</p>
+          <p className="mt-2 text-muted-foreground">Upload a food photo to see estimated nutrition and minerals. Nothing from this scan is saved.</p>
         </div>
         <Card>
           <CardHeader><CardTitle>Upload food photo</CardTitle></CardHeader>
@@ -134,10 +108,7 @@ export default function FoodPage() {
               <CardHeader><CardTitle>What this means</CardTitle></CardHeader>
               <CardContent className="grid gap-4">
                 <p className="text-sm text-muted-foreground">{analysis.reasoning}</p>
-                <Button className="w-fit" disabled={saving} onClick={save}>
-                  <Save className="h-4 w-4" />
-                  {saving ? "Saving..." : "Save to Tracker"}
-                </Button>
+                <p className="rounded-md bg-muted p-3 text-sm text-muted-foreground">This is an on-the-fly AI estimate and is not stored in the database.</p>
               </CardContent>
             </Card>
           </>

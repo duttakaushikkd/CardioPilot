@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Activity, Camera, Gauge, LogIn, LogOut, Upload } from "lucide-react";
+import { Activity, Camera, Gauge, LogIn, LogOut, Upload, UserPlus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const nav = [
@@ -12,14 +12,15 @@ const nav = [
 ];
 
 export function Shell({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<{ name: string; email: string } | null>(null);
+  const [user, setUser] = useState<{ name: string } | null>(null);
 
   useEffect(() => {
     const saved = window.localStorage.getItem("trackItUser");
     if (saved) setUser(JSON.parse(saved));
   }, []);
 
-  function logout() {
+  async function logout() {
+    await fetch("/api/auth/logout", { method: "POST" });
     window.localStorage.removeItem("trackItUser");
     setUser(null);
   }
@@ -47,16 +48,23 @@ export function Shell({ children }: { children: React.ReactNode }) {
             {user ? (
               <Button variant="outline" size="sm" onClick={logout}><LogOut className="h-4 w-4" /> Logout</Button>
             ) : (
-              <Button asChild size="sm"><Link href="/login"><LogIn className="h-4 w-4" /> Login</Link></Button>
+              <>
+                <Button asChild variant="outline" size="sm"><Link href="/signup"><UserPlus className="h-4 w-4" /> Sign up</Link></Button>
+                <Button asChild size="sm"><Link href="/login"><LogIn className="h-4 w-4" /> Login</Link></Button>
+              </>
             )}
           </div>
         </div>
       </header>
       <main className="mx-auto max-w-7xl px-4 py-6">{children}</main>
-      <nav className="fixed inset-x-0 bottom-0 z-20 grid grid-cols-4 border-t bg-background md:hidden">
+      <nav className="fixed inset-x-0 bottom-0 z-20 grid grid-cols-5 border-t bg-background md:hidden">
         <Link href="/login" className="flex flex-col items-center gap-1 px-1 py-2 text-[11px] text-muted-foreground">
           <LogIn className="h-4 w-4" />
           Login
+        </Link>
+        <Link href="/signup" className="flex flex-col items-center gap-1 px-1 py-2 text-[11px] text-muted-foreground">
+          <UserPlus className="h-4 w-4" />
+          Sign up
         </Link>
         {nav.map((item) => (
           <Link key={item.href} href={item.href} className="flex flex-col items-center gap-1 px-1 py-2 text-[11px] text-muted-foreground">

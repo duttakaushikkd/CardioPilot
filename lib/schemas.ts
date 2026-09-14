@@ -36,13 +36,3 @@ export const lipidExtractionSchema = z.object({
   VLDL: z.number().nonnegative(),
   nonHDL: z.number().nonnegative().optional()
 });
-
-export const mealSaveSchema = z.object({
-  userId: z.string().default("demo-user"),
-  date: z.string(),
-  mealType: z.string().min(1),
-  imageUrl: z.string().optional(),
-  aiPrediction: mealAnalysisSchema,
-  userCorrected: mealAnalysisSchema,
-  correctionMade: z.boolean()
-});
