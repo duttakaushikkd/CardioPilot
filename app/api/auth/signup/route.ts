@@ -36,7 +36,10 @@ export async function POST(request: Request) {
     const response = NextResponse.json({ user: { name: user.name } }, { status: 201 });
     setSessionCookie(response, String(user._id));
     return response;
-  } catch (error) {
+  } catch (error: unknown) {
+    if (typeof error === "object" && error !== null && "code" in error && (error as { code: number }).code === 11000) {
+      return NextResponse.json({ error: "This username is already taken" }, { status: 409 });
+    }
     return NextResponse.json({ error: error instanceof Error ? error.message : "Signup failed" }, { status: 400 });
   }
 }
