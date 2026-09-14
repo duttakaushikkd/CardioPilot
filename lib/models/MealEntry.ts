@@ -20,6 +20,11 @@ const AnalysisSchema = new Schema(
     fiber: Number,
     sugar: Number,
     sodium: Number,
+    potassium: Number,
+    calcium: Number,
+    iron: Number,
+    magnesium: Number,
+    cholesterolMg: Number,
     healthScore: Number,
     cholesterolRisk: { type: String, enum: ["Low", "Medium", "High"] },
     reasoning: String

@@ -3,8 +3,8 @@ import "./globals.css";
 import { Shell } from "@/components/shell";
 
 export const metadata: Metadata = {
-  title: "Cardio Pilot",
-  description: "Personal cholesterol tracking agent for lipid reports and meal analysis."
+  title: "Track It",
+  description: "Simple food nutrition analysis and cholesterol tracking."
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

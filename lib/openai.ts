@@ -15,7 +15,7 @@ export async function analyzeMealImage(imageDataUrl: string, mealType: string, n
     input: [
       {
         role: "system",
-        content: "You are Cardio Pilot. Analyze a meal photo for cholesterol management. Return only strict JSON matching the schema. Estimate cautiously and state uncertainty in reasoning."
+        content: "You are Track It. Analyze a food photo and estimate practical nutrition and minerals. Return only strict JSON matching the schema. Include calories, protein, carbohydrates, fat, saturated fat, fiber, sugar, sodium, potassium, calcium, iron, magnesium, dietary cholesterol in mg, a cholesterol risk rating, and concise reasoning. Estimate cautiously and state uncertainty in reasoning."
       },
       {
         role: "user",

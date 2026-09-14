@@ -16,7 +16,10 @@ export default function UploadReportPage() {
     event.preventDefault();
     setLoading(true);
     setMessage("");
-    const res = await fetch("/api/report/upload", { method: "POST", body: new FormData(event.currentTarget) });
+    const form = new FormData(event.currentTarget);
+    const saved = window.localStorage.getItem("trackItUser");
+    if (saved) form.set("userId", JSON.parse(saved).id);
+    const res = await fetch("/api/report/upload", { method: "POST", body: form });
     const body = await res.json();
     setLoading(false);
     if (!res.ok) return setMessage(body.error || "Upload failed");

@@ -1,6 +1,6 @@
-# Cardio Pilot
+# Track It
 
-Production-ready Next.js cholesterol tracking agent for lipid reports and reviewed meal-photo nutrition logs.
+Production-ready Next.js app for food nutrition analysis and cholesterol tracking.
 
 ## Stack
 
@@ -23,12 +23,11 @@ Set `OPENAI_API_KEY` and `MONGODB_URI` in `.env.local` or Vercel.
 ## Routes
 
 - `POST /api/report/upload`
+- `POST /api/auth/login`
 - `POST /api/meal/analyze`
 - `POST /api/meal/save`
 - `GET /api/dashboard`
-- `GET /api/progress`
-- `GET /api/coach`
 
 ## Notes
 
-The meal workflow intentionally pauses on `/meal/review` so users can edit foods, quantities, and nutrition totals before saving. The app stores both the raw AI prediction and the user-corrected record.
+The streamlined app has login, cholesterol report upload, a food-photo nutrition scanner, and a dashboard that plainly shows whether LDL is reducing.

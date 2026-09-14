@@ -34,36 +34,6 @@ export async function getDashboardData(userId = "demo-user") {
   };
 }
 
-export function calculateProgress(dashboard: Awaited<ReturnType<typeof getDashboardData>>) {
-  const days = dashboard.daily.length;
-  const mealsLogged = dashboard.meals.length;
-  const friendlyDays = dashboard.daily.filter((d) => d.saturatedFat <= 13 && d.fiber >= 25).length;
-  const averageFiber = days ? dashboard.daily.reduce((sum, d) => sum + d.fiber, 0) / days : 0;
-  const averageSaturatedFat = dashboard.averages.saturatedFat;
-  return {
-    totalDaysTracked: days,
-    mealsLogged,
-    bestStreak: getBestStreak(dashboard.daily.map((d) => d.date)),
-    ldlFriendlyDaysPct: days ? Math.round((friendlyDays / days) * 100) : 0,
-    averageFiber: Number(averageFiber.toFixed(1)),
-    averageSaturatedFat
-  };
-}
-
-function getBestStreak(dates: string[]) {
-  const sorted = [...new Set(dates)].sort();
-  let best = 0;
-  let current = 0;
-  let previous = "";
-  for (const date of sorted) {
-    const diff = previous ? (new Date(date).getTime() - new Date(previous).getTime()) / 86400000 : 1;
-    current = diff === 1 ? current + 1 : 1;
-    best = Math.max(best, current);
-    previous = date;
-  }
-  return best;
-}
-
 export function generateInsights(dashboard: Awaited<ReturnType<typeof getDashboardData>>) {
   const last7 = dashboard.daily.slice(-7);
   const prev7 = dashboard.daily.slice(-14, -7);

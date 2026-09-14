@@ -16,6 +16,11 @@ export type MealAnalysis = {
   fiber: number;
   sugar: number;
   sodium: number;
+  potassium: number;
+  calcium: number;
+  iron: number;
+  magnesium: number;
+  cholesterolMg: number;
   healthScore: number;
   cholesterolRisk: CholesterolRisk;
   reasoning: string;

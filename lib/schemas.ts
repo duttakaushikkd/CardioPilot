@@ -16,6 +16,11 @@ export const mealAnalysisSchema = z.object({
   fiber: z.number().nonnegative(),
   sugar: z.number().nonnegative(),
   sodium: z.number().nonnegative(),
+  potassium: z.number().nonnegative(),
+  calcium: z.number().nonnegative(),
+  iron: z.number().nonnegative(),
+  magnesium: z.number().nonnegative(),
+  cholesterolMg: z.number().nonnegative(),
   healthScore: z.number().min(0).max(100),
   cholesterolRisk: z.enum(["Low", "Medium", "High"]),
   reasoning: z.string().min(1)
